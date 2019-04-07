@@ -1,0 +1,159 @@
+<html lang="en">
+<% include template/head%>
+
+<body>
+    <div class="container-scroller">
+        <!-- navbar -->
+        <% include template/nav%>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- sidebar -->
+            <% include template/sidebar%>
+            <!-- Content -->
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <p class="card-title">Bảng điểm </p>
+                                    <div class="table-responsive">
+                                        <div id="recent-purchases-listing_wrapper"
+                                            class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6"></div>
+                                                <div class="col-sm-12 col-md-6"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <table id="recent-purchases-listing"
+                                                        class="table dataTable no-footer" role="grid">
+                                                        <thead>
+                                                            <tr role="row">
+
+                                                                <th class="sorting_asc" tabindex="0"
+                                                                    aria-controls="recent-purchases-listing" rowspan="1"
+                                                                    colspan="1" aria-sort="ascending"
+                                                                    style="width: 50px;">STT</th>
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="recent-purchases-listing" rowspan="1"
+                                                                    colspan="1" style="width: 100px;">Lớp</th>
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="recent-purchases-listing" rowspan="1"
+                                                                    colspan="1" style="width: 130px;">Mã SV</th>
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="recent-purchases-listing" rowspan="1"
+                                                                    colspan="1" style="width: 73.4px;">Họ và tên</th>
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="recent-purchases-listing" rowspan="1"
+                                                                    colspan="1" style="width: 73.4px;">Ngày sinh</th>
+                                                                <%monhoc.forEach((item3)=>{ %>
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="recent-purchases-listing" rowspan="1"
+                                                                    colspan="1" style="width: 73.4px;"><%=item3.ten%>
+                                                                    (<%=item3.soTC%>TC)
+                                                                </th>
+                                                                <%})%>
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="recent-purchases-listing" rowspan="1"
+                                                                    colspan="1" style="width: 73.4px;">Điểm TB học kỳ</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <%n=1%>
+                                                            <%sinhvien.forEach((item)=>{ %>
+                                                            <tr role="row" class="odd">
+
+                                                                <td><%=n%></td>
+                                                                <td><%=item.lop%></td>
+                                                                <td><%=item.masinhvien%></td>
+                                                                <td><%=item.ten%></td>
+                                                                <td><%=item.ngaysinh%></td>
+                                                                <%var trungbinh = 0%>
+                                                                <%var tinchi = 0%>
+                                                                <%diem.forEach((item2)=>{ %>
+                                                            
+                                                                <%if(item.masinhvien==item2.maSV){%>
+                                                                    <%trungbinh = trungbinh +parseInt(item2.tb)*parseInt(item2.soTC)%>
+                                                                    <% tinchi = tinchi + parseInt(item2.soTC) %>
+                                                                <td><%=item2.tb%></td>
+                                                                    
+                                                                <%}%>
+
+                                                                <%})%>
+                                                                <td><%=Math.round((trungbinh/tinchi) * 1000)/1000%></td>
+
+
+
+                                                                
+                                                            </tr>
+                                                            <%n=n+1%>
+                                                            <%})%>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5"></div>
+                                                <div class="col-sm-12 col-md-7"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <% include template/footer%>
+                <!-- partial -->
+            </div>
+            <!-- Content wrapper -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    <!-- plugins:js -->
+    <script src="/vendors/base/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <script src="/vendors/chart.js/Chart.min.js"></script>
+    <script src="/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="/js/off-canvas.js"></script>
+    <script src="/js/hoverable-collapse.js"></script>
+    <script src="/js/template.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/data-table.js"></script>
+    <script src="/js/jquery.dataTables.js"></script>
+    <script src="/js/dataTables.bootstrap4.js"></script>
+    <!-- End custom js for this page-->
+
+    <script>
+        var xoa = (tinnhan) => {
+            if (window.confirm(tinnhan) == true) {
+                return true
+            }
+            return
+            false
+        }
+    </script>
+
+
+    <div class="__transltor">
+        <div class="__transltor_button" style="left: 0px; top: 0px;"></div>
+        <!---->
+    </div>
+</body>
+
+</html>
